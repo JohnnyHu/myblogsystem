@@ -2,7 +2,6 @@
 #!/usr/bin/python
 # filename: start_webserver.py
 # codedtime: 2014-9-6 21:16:39
-# -*- coding: utf-8 -*-
 
 # 构成整个网站主框架
 import bottle
@@ -122,5 +121,5 @@ myapp = bottle.app()
 # #---web应用程序入口---# #
 if __name__ == '__main__':
     bottle.debug(True)
-    bottle.run(app=myapp, host="localhost", port=8086)
+    bottle.run(app=myapp, host="localhost", port=8088)
     #bottle.run(app=myapp, quiet=False, reloader=True)

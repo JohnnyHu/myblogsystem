@@ -28,15 +28,12 @@ def gen_article(index):
     conn = operate_mysql.connect_sqlserver()      # 连接数据库
     cursor = conn.cursor()  
     # 创建数据游标
-    query = ("SELECT post_content FROM mb_posts WHERE ID=%s")
+    query = ("SELECT post_title, post_content FROM mb_posts WHERE ID=%s")
     cursor.execute(query, (index, )) # 查询内容
     
-    content = cursor.fetchall()  # 
+    listdata = cursor.fetchall()  # 
     conn.commit()  # 提交修改
     cursor.close() # 关闭数据库
     
-    return content[0][0]
-    
-    
-    
-    
+    return bottle.template('templates/article.tpl', title=listdata[0][0],  content = listdata[0][1])    
+
