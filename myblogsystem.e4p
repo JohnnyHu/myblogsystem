@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
-<!-- eric5 project file for project myblogsystem -->
-<!-- Saved: 2014-09-24, 00:16:55 -->
-<!-- Copyright (C) 2014 Johnny Hu, 908227299@qq.com -->
+<!-- eric project file for project myblogsystem -->
+<!-- Saved: 2015-03-29, 01:29:38 -->
+<!-- Copyright (C) 2015 Johnny Hu, 908227299@qq.com -->
 <Project version="5.1">
   <Language>en_US</Language>
   <Hash>4d3621c9d78cd3ce23c5e54bf1c421f1d00746b4</Hash>
@@ -12,9 +12,15 @@
   <Version>0.1</Version>
   <Author>Johnny Hu</Author>
   <Email>908227299@qq.com</Email>
+  <Eol index="-1"/>
   <Sources>
     <Source>start_webserver.py</Source>
     <Source>__init__.py</Source>
+    <Source>web_bin/generate_index.py</Source>
+    <Source>web_bin/login_admin.py</Source>
+    <Source>web_bin/operate_mysql.py</Source>
+    <Source>web_bin/post_new.py</Source>
+    <Source>web_bin/__init__.py</Source>
   </Sources>
   <Forms/>
   <Translations/>
