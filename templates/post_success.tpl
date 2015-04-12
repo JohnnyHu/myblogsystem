@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title> JohnnyHu博客后台系统->发布成功</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/Cool_styles.css">
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css">
 
   </head>
   

@@ -5,8 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title> JohnnyHu的博客->首页</title>
-    <link rel="stylesheet" type="text/css" media="all" href="../static/css/Cool_styles.css">
-
+	<!--
+    <link rel="stylesheet" type="text/css" media="all" href="../static/css/style.css">  
+	-->
+	<style type="text/css">
+		body{
+			width: 1000px; 
+			margin: 0 auto;
+			font-family: Verdana, Geneva, Arial, sans-serif;
+		}
+	</style>
   </head>
   
 <body>

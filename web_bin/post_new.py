@@ -30,6 +30,6 @@ def submit_post():
 #        return "submit success."
         return bottle.template('templates/post_success.tpl', action = '/post_success') 
     else:     
-        return bottle.template('xhEditor/writeposts.tpl', ipport = netloc, action = '/post_new',) 
+        return bottle.template('templates/writeposts.tpl', ipport = netloc, action = '/post_new',) 
 
     

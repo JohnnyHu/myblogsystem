@@ -18,26 +18,22 @@ STATIC_CSS_PATH = ospath.abspath(ospath.join(STATIC_PATH, "css/"))
 STATIC_JS_PATH = ospath.abspath(ospath.join(STATIC_PATH, "js/"))
 STATIC_IMAGES_PATH = ospath.abspath(ospath.join(STATIC_PATH, "images/"))
 
-WEB_Bin_PATH = ospath.abspath(ospath.join(directorypath, "web_bin/"))
+WEB_BIN_PATH = ospath.abspath(ospath.join(directorypath, "web_bin/"))
 TEMPLATES_PATH = ospath.abspath(ospath.join(directorypath, "templates/"))
 TEMPLATES_POSTS_PATH = ospath.abspath(ospath.join(TEMPLATES_PATH, "templates/writepost"))
 
-# xheditor静态文件绝对路径
-XHEDITOR_PATH = ospath.abspath(ospath.join(directorypath, "xhEditor/"))
-XHEDITOR_STATIC_PATH = ospath.abspath(ospath.join(XHEDITOR_PATH, "static/"))
-XHEDITOR_JS_PATH = ospath.abspath(ospath.join(XHEDITOR_STATIC_PATH, "js/"))
-XHEDITOR_CSS_PATH = ospath.abspath(ospath.join(XHEDITOR_STATIC_PATH, "css/"))
-XHEDITOR_LANG_PATH = ospath.abspath(ospath.join(XHEDITOR_PATH, "xheditor_lang/"))
+# ueditor静态文件绝对路径
+UEDITOR_PATH = ospath.abspath(ospath.join(directorypath, "ueditor/"))
 
 # 插入路径
 #bottle.TEMPLATE_PATH.insert(0, TEMPLATES_PATH)  # 加载模板路径
-#bottle.TEMPLATE_PATH.insert(0, WEB_Bin_PATH)    # 加载模板路径
+#bottle.TEMPLATE_PATH.insert(0, WEB_BIN_PATH)    # 加载模板路径
 #bottle.TEMPLATE_PATH.insert(0, STATIC_CSS_PATH) # 加载模板路径
 
 ## #---静态文件路径 ----# #
 @bottle.route('/web_bin/<filename:path>')
 def webbinpath(filename):
-    return bottle.static_file(filename, root = WEB_Bin_PATH)
+    return bottle.static_file(filename, root = WEB_BIN_PATH)
 
 @bottle.route('/templates/<filename:path>')
 def templatepath(filename):
@@ -64,26 +60,10 @@ def staticpath4(filename):
     return bottle.static_file(filename, root = STATIC_IMAGES_PATH)
 
 ## #---xheditor静态文件路径 ----# #
-@bottle.route('/article/xhEditor/<filename:path>')
-@bottle.route('/xhEditor/<filename:path>', name = "xhedpath")
-def xheditorspath(filename):
-    return bottle.static_file(filename, root = XHEDITOR_PATH)
-
-@bottle.route('/xhEditor/static/<filename:path>')
-def xhstaticpath(filename):
-    return bottle.static_file(filename, root = XHEDITOR_STATIC_PATH)
-    
-@bottle.route('/xhEditor/static/js/<filename:path>')
-def xhjspath(filename):
-    return bottle.static_file(filename, root = XHEDITOR_JS_PATH)
-    
-@bottle.route('/xhEditor/static/css/<filename:path>')
-def xhcsspath(filename):
-    return bottle.static_file(filename, root = XHEDITOR_CSS_PATH)
-    
-@bottle.route('/xhEditor/xheditor_lang/<filename:path>',)
-def xhlangpath(filename):
-    return bottle.static_file(filename, root = XHEDITOR_LANG_PATH)
+@bottle.route('/article/ueditor/<filename:path>')
+@bottle.route('/ueditor/<filename:path>', name = "uedpath")
+def ueditorspath(filename):
+    return bottle.static_file(filename, root = UEDITOR_PATH)
  
 #@bottle.route('/')
 #def redirected():
@@ -114,7 +94,6 @@ def postnew2():
 def atricledisplay(id):
    return  gen_index.gen_article(id)
    
- 
 # 创建实例对象
 myapp = bottle.app()
 
