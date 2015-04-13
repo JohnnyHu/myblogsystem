@@ -71,6 +71,7 @@ float:left
 .login-button .button{
 float:right
 }
+
 .login-button .button input{
 background:url(../images/login_button.gif) no-repeat; 
 border:0; 

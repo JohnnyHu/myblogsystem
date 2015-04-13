@@ -9,9 +9,9 @@ import web_bin.generate_index as gen_index
 
 def check_userinfo():
     a_list = []   # 创建一个空列表
-#    username = bottle.request.GET.get('loginname','').strip()  # 用户名
+#    username = bottle.request.GET.get('username','').strip()  # 用户名
 #    password = bottle.request.GET.get('password','').strip()   # 密码
-    username = bottle.request.forms.get('loginname','')  # 用户名
+    username = bottle.request.forms.get('username','')  # 用户名
     password = bottle.request.forms.get('password','')   # 密码
     if username is not None or password is not None:
         try:
@@ -40,8 +40,8 @@ def check_userinfo():
         return  a_list
 
 def login_admin():    
-    if bottle.request.POST.get('bs-submit','').strip(): #点击登录按钮
-    #if bottle.request.forms.get('bs-submit','').strip(): #点击登录按钮
+    if bottle.request.POST.get('submit','').strip(): #点击登录按钮
+    #if bottle.request.forms.get('submit','').strip(): #点击登录按钮
         a_list = check_userinfo()
         if a_list:
             #a_name = a_list[0][0]  # 获得用户名
