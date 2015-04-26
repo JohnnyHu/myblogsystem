@@ -1,20 +1,43 @@
 # -*- coding:  utf-8 -*-
 #!/usr/bin/python
-# filename: start_webserver.py
-# codedtime: 2014-9-6 21:16:39
+# filename: GETPOST_test.py
+# codedtime: 2014-9-20 19:07:04
 
-import os.path
-path1 = os.path.join(os.path.dirname(__file__), "templates/")
-path2 = os.path.abspath(path1)
-filename = os.path.basename(path2) #返回文件名
 
-dirname = os.path.dirname(__file__)
-STATIC_CSS_PATH = path1+ "/css"
-STATIC_IMAGES_PATH = path2 + "/images"
-print(dirname)
-print(path1)
-print(path2)
-print(filename)
+import bottle
 
-print(STATIC_CSS_PATH)
-print(STATIC_IMAGES_PATH)
+def check_login(username, password):
+    if username == '胡' and password == '234':
+        return True
+    else:
+        return False
+
+@bottle.route('/login')
+def login():
+    return ''' <form action="/login" method="post">
+                 Username: <input name="username" type="text" />
+                 Password: <input name="password" type="password" />
+                 <input value="Login" type="submit">
+               </form>
+            '''
+
+@bottle.route('/login', method='POST')
+def do_login():
+    # 第一种方式
+#   username = request.forms.get('username')
+#   password = request.forms.get('password')
+
+    #第二种方式
+    postValue = bottle.request.POST.decode('utf-8')
+    username = bottle.request.POST.get('username')
+    password = bottle.request.POST.get('password')
+
+    print(username)
+    print(password)
+    
+    if check_login(username, password):
+        return "<p> Your login information was correct.</p>"
+    else:
+        return "<p>Login failed. </p>"
+
+bottle.run(host='localhost', port=8083)

@@ -6,93 +6,104 @@
 # 构成整个网站主框架
 import bottle
 import os.path as ospath
-import web_bin.login_admin 
-import web_bin.post_new
-import web_bin.generate_index as gen_index
+import jhu_admin.admin_login
+import jhu_admin.mange_index
+import jhu_admin.posts_insert
+
+import jhu_content.posts_operate as posts_opt
 
 # 获取绝对路径
 directorypath = ospath.dirname(__file__)
 
-STATIC_PATH = ospath.abspath(ospath.join(directorypath, "static/"))
-STATIC_CSS_PATH = ospath.abspath(ospath.join(STATIC_PATH, "css/"))
-STATIC_JS_PATH = ospath.abspath(ospath.join(STATIC_PATH, "js/"))
-STATIC_IMAGES_PATH = ospath.abspath(ospath.join(STATIC_PATH, "images/"))
+#----jhu_admin文件夹的一些路径----#
+PATH_JHU_ADMIN = ospath.abspath(ospath.join(directorypath, "jhu_admin/"))
+PATH_ADMIN_TPL = ospath.abspath(ospath.join(PATH_JHU_ADMIN, "admin_tpl/"))
+PATH_AMDIN_CSS = ospath.abspath(ospath.join(PATH_JHU_ADMIN, "admin_css/"))
+PATH_AMDIN_JS = ospath.abspath(ospath.join(PATH_JHU_ADMIN, "admin_js/"))
+PATH_AMDIN_FONT = ospath.abspath(ospath.join(PATH_JHU_ADMIN, "admin_fonts/"))
+PATH_AMDIN_IMGAGES = ospath.abspath(ospath.join(PATH_JHU_ADMIN, "admin_images/"))
 
-WEB_BIN_PATH = ospath.abspath(ospath.join(directorypath, "web_bin/"))
-TEMPLATES_PATH = ospath.abspath(ospath.join(directorypath, "templates/"))
-TEMPLATES_POSTS_PATH = ospath.abspath(ospath.join(TEMPLATES_PATH, "templates/writepost"))
-
-# ueditor静态文件绝对路径
-UEDITOR_PATH = ospath.abspath(ospath.join(directorypath, "ueditor/"))
+# jhu_admin静态文件路径
+@bottle.route('/jhu_admin/<filename:path>')
+def adminpath(filename):
+    return bottle.static_file(filename, root = PATH_JHU_ADMIN)
+@bottle.route('/admin_tpl/<filename:path>')
+def admintplpath(filename):
+    return bottle.static_file(filename, root = PATH_ADMIN_TPL)   
+@bottle.route('/admin_js/<filename:path>')
+def adminjspath(filename):
+    return bottle.static_file(filename, root = PATH_AMDIN_JS)
+@bottle.route('/admin_css/<filename:path>')
+def admincsspath(filename):
+    return bottle.static_file(filename, root = PATH_AMDIN_CSS)
+@bottle.route('/admin_fonts/<filename:path>')
+def adminfontspath(filename):
+    return bottle.static_file(filename, root = PATH_AMDIN_CSS)
+@bottle.route('/admin_imgages/<filename:path>')
+def adminimagespath(filename):
+    return bottle.static_file(filename, root = PATH_AMDIN_IMGAGES)
 
 # 插入路径
-#bottle.TEMPLATE_PATH.insert(0, TEMPLATES_PATH)  # 加载模板路径
-#bottle.TEMPLATE_PATH.insert(0, WEB_BIN_PATH)    # 加载模板路径
-#bottle.TEMPLATE_PATH.insert(0, STATIC_CSS_PATH) # 加载模板路径
-
-## #---静态文件路径 ----# #
-@bottle.route('/web_bin/<filename:path>')
-def webbinpath(filename):
-    return bottle.static_file(filename, root = WEB_BIN_PATH)
-
-@bottle.route('/templates/<filename:path>')
-def templatepath(filename):
-    return bottle.static_file(filename, root = TEMPLATES_PATH)
+bottle.TEMPLATE_PATH.insert(0, PATH_ADMIN_TPL)  # 加载模板路径
+@bottle.route('/login')
+@bottle.route('/login', method = 'POST')
+def adminLogin():
+    return jhu_admin.admin_login.login()
     
-@bottle.route('/templates/writepost/<filename:path>')
-def templatepath2(filename):
-    return bottle.static_file(filename, root = TEMPLATES_POSTS_PATH)
+@bottle.route('/index')
+def adminIndex():
+    return jhu_admin.mange_index.index()
     
-@bottle.route('/static/<filename:path>')
-def staticpath(filename):
-    return bottle.static_file(filename, root = STATIC_PATH)
-    
-@bottle.route('/static/css/<filename:path>')
-def staticpath2(filename):
-    return bottle.static_file(filename, root = STATIC_CSS_PATH)
-    
-@bottle.route('/static/js/<filename:path>')
-def staticpath3(filename):
-    return bottle.static_file(filename, root = STATIC_JS_PATH)
+@bottle.route('/newposts')
+@bottle.route('/newposts', method = 'POST')
+def addposts():
+    return jhu_admin.posts_insert.newPosts()
 
-@bottle.route('/static/images/<filename:path>')
-def staticpath4(filename):
-    return bottle.static_file(filename, root = STATIC_IMAGES_PATH)
-
-## #---xheditor静态文件路径 ----# #
-@bottle.route('/article/ueditor/<filename:path>')
-@bottle.route('/ueditor/<filename:path>', name = "uedpath")
-def ueditorspath(filename):
-    return bottle.static_file(filename, root = UEDITOR_PATH)
  
-#@bottle.route('/')
-#def redirected():
-#    #return bottle.redirect('/go_index') # 重定向到首页
+#----jhu_content文件夹的一些路径----#
+PATH_JHU_CONTENT = ospath.abspath(ospath.join(directorypath, "jhu_content/"))
+PATH_CONTENT_TPL = ospath.abspath(ospath.join(PATH_JHU_CONTENT, "content_tpl/"))
+PATH_CONTENT_CSS = ospath.abspath(ospath.join(PATH_JHU_CONTENT, "content_css/"))
+PATH_CONTENT_JS = ospath.abspath(ospath.join(PATH_JHU_CONTENT, "content_js/"))
+PATH_CONTENT_FONT = ospath.abspath(ospath.join(PATH_JHU_CONTENT, "content_fonts/"))
+PATH_CONTENT_IMGAGES = ospath.abspath(ospath.join(PATH_JHU_CONTENT, "content_images/"))
+PATH_CONTENT_IMGAGES_COMMON = ospath.abspath(ospath.join(PATH_CONTENT_IMGAGES, "common/"))
 
-@bottle.route('/')    
-@bottle.route('/go_index')
-def goindex():
-    return gen_index.createHomePages()
-    
-@bottle.route('/login_admin')
-def loginadmin():
-    return web_bin.login_admin.login_admin()
-    
-@bottle.route('/login_admin', method = 'POST')
-def loginadmin2():
-    return web_bin.login_admin.login_admin()
+# jhu_content静态文件路径
+@bottle.route('/jhu_content/<filename:path>')
+def contentpath(filename):
+    return bottle.static_file(filename, root = PATH_JHU_CONTENT)
+@bottle.route('/content_tpl/<filename:path>')
+def contenttplpath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_TPL)   
+@bottle.route('/content_js/<filename:path>')
+def contentjspath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_JS)
+@bottle.route('/content_css/<filename:path>')
+def contentcsspath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_CSS)
+@bottle.route('/content_fonts/<filename:path>')
+def contentfontspath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_FONT)
+@bottle.route('/content_imgages/<filename:path>')
+def contentimagespath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_IMGAGES)
+@bottle.route('/content_imgages/common/:filename')
+def contentimagescommonpath(filename):
+    return bottle.static_file(filename, root = PATH_CONTENT_IMGAGES_COMMON)
 
-@bottle.route('/post_new')
-def postnew():
-   return  web_bin.post_new.submit_post()
-   
-@bottle.route('/post_new', method = 'POST')
-def postnew2():
-   return  web_bin.post_new.submit_post()
-   
+# 插入路径
+bottle.TEMPLATE_PATH.insert(0, PATH_CONTENT_TPL)  # 加载模板路径
+@bottle.route('/articles')
+def allPosts():
+   return  posts_opt.createHomePages()
 @bottle.route('/article/<id:int>')
-def atricledisplay(id):
-   return  gen_index.gen_article(id)
+def eachPost(id):
+   return  posts_opt.gen_article(id)
+
+#----jhu_includes文件夹的一些路径----#
+PATH_JHU_INCLUDES = ospath.abspath(ospath.join(directorypath, "jhu_includes/"))
+
    
 # 创建实例对象
 myapp = bottle.app()
@@ -100,5 +111,5 @@ myapp = bottle.app()
 # #---web应用程序入口---# #
 if __name__ == '__main__':
     bottle.debug(True)
-    bottle.run(app=myapp, host="localhost", port=8088)
+    bottle.run(app=myapp, host="localhost", port=8091)
     #bottle.run(app=myapp, quiet=False, reloader=True)

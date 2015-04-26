@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project myblogsystem -->
-<!-- Saved: 2015-03-29, 01:29:38 -->
+<!-- Saved: 2015-04-26, 23:57:12 -->
 <!-- Copyright (C) 2015 Johnny Hu, 908227299@qq.com -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -16,11 +16,13 @@
   <Sources>
     <Source>start_webserver.py</Source>
     <Source>__init__.py</Source>
-    <Source>web_bin/generate_index.py</Source>
-    <Source>web_bin/login_admin.py</Source>
-    <Source>web_bin/operate_mysql.py</Source>
-    <Source>web_bin/post_new.py</Source>
-    <Source>web_bin/__init__.py</Source>
+    <Source>jhu_admin/__init__.py</Source>
+    <Source>jhu_admin/admin_login.py</Source>
+    <Source>jhu_admin/mange_index.py</Source>
+    <Source>jhu_admin/posts_insert.py</Source>
+    <Source>jhu_admin/operate_mysql.py</Source>
+    <Source>jhu_content/__init__.py</Source>
+    <Source>jhu_content/posts_operate.py</Source>
   </Sources>
   <Forms/>
   <Translations/>
